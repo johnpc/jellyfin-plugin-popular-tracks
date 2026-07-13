@@ -8,12 +8,12 @@
     "category": "Metadata",
     "versions": [
       {
-        "version": "0.0.0.2",
-        "changelog": "See the full changelog at [GitHub](https://github.com/johnpc/jellyfin-plugin-popular-tracks/releases/tag/0.0.0.2)",
+        "version": "0.0.0.3",
+        "changelog": "See the full changelog at [GitHub](https://github.com/johnpc/jellyfin-plugin-popular-tracks/releases/tag/0.0.0.3)",
         "targetAbi": "10.11.0.0",
-        "sourceUrl": "https://github.com/johnpc/jellyfin-plugin-popular-tracks/releases/download/0.0.0.2/jellyfin-plugin-popular-tracks-0.0.0.2.zip",
-        "checksum": "230d816933d55c9317d3be63d8dcaf57",
-        "timestamp": "2026-07-13T17:45:41Z"
+        "sourceUrl": "https://github.com/johnpc/jellyfin-plugin-popular-tracks/releases/download/0.0.0.3/jellyfin-plugin-popular-tracks-0.0.0.3.zip",
+        "checksum": "6c97165951e84e4d1eb5e0cc446251f7",
+        "timestamp": "2026-07-13T17:56:28Z"
       }
     ]
   }
