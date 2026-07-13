@@ -1,0 +1,21 @@
+---
+name: "PopularTracks"
+guid: "f24f31a3-b1a9-4f70-97c9-4b25a8863a59"
+version: "0.0.0.1"
+targetAbi: "10.11.0.0"
+framework: "net9.0"
+overview: "Fixes artist \"Popular\" track ordering using real Last.fm popularity instead of local play counts."
+description: >
+  PopularTracks reorders the artist "Popular" (top songs) list by real listening popularity from the
+  Last.fm API, instead of Jellyfin's local PlayCount which is meaningless on servers where nobody
+  scrobbles. It transparently intercepts the artist songs query (SortBy=PlayCount scoped to an
+  artist), re-queries the full owned track set, and re-orders it by Last.fm artist.getTopTracks rank —
+  unmatched local tracks fall to the bottom. Everything else is left untouched, and it fails open to
+  native behavior when the artist is unknown to Last.fm. Requires only a free Last.fm API key; no
+  client changes.
+category: "Metadata"
+owner: "johnpc"
+artifacts:
+  - "Jellyfin.Plugin.PopularTracks.dll"
+changelog: >
+  Initial release
