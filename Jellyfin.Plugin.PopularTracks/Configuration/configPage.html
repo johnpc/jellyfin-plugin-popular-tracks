@@ -19,6 +19,12 @@
                             <span>Re-order the artist "Popular" list by Last.fm popularity</span>
                         </label>
                     </div>
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label>
+                            <input id="CollapseDuplicates" name="CollapseDuplicates" type="checkbox" is="emby-checkbox" />
+                            <span>Collapse duplicate copies of the same song (show each once)</span>
+                        </label>
+                    </div>
                     <div class="inputContainer">
                         <label for="CacheTtlHours">Cache lifetime (hours):</label>
                         <input id="CacheTtlHours" name="CacheTtlHours" type="number" min="1" max="720" is="emby-input" />
@@ -45,6 +51,7 @@
                     ApiClient.getPluginConfiguration(PopularTracksConfig.pluginUniqueId).then(function (config) {
                         config.LastFmApiKey = document.querySelector('#LastFmApiKey').value;
                         config.Enabled = document.querySelector('#Enabled').checked;
+                        config.CollapseDuplicates = document.querySelector('#CollapseDuplicates').checked;
                         config.CacheTtlHours = parseInt(document.querySelector('#CacheTtlHours').value);
 
                         ApiClient.updatePluginConfiguration(PopularTracksConfig.pluginUniqueId, config).then(function (result) {
@@ -61,6 +68,7 @@
                 ApiClient.getPluginConfiguration(PopularTracksConfig.pluginUniqueId).then(function (config) {
                     document.querySelector('#LastFmApiKey').value = config.LastFmApiKey || '';
                     document.querySelector('#Enabled').checked = config.Enabled !== false;
+                    document.querySelector('#CollapseDuplicates').checked = config.CollapseDuplicates !== false;
                     document.querySelector('#CacheTtlHours').value = config.CacheTtlHours || 12;
 
                     Dashboard.hideLoadingMsg();

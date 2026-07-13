@@ -15,6 +15,7 @@ namespace Jellyfin.Plugin.PopularTracks.Configuration
             LastFmApiKey = string.Empty;
             Enabled = true;
             CacheTtlHours = 12;
+            CollapseDuplicates = true;
         }
 
         /// <summary>
@@ -31,5 +32,12 @@ namespace Jellyfin.Plugin.PopularTracks.Configuration
         /// Gets or sets how long (in hours) a fetched artist top-tracks list is cached before refetch.
         /// </summary>
         public int CacheTtlHours { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to collapse duplicate copies of the same track in
+        /// the "Popular" list, showing each song once. Recommended for libraries that hold several
+        /// physical copies of a song (e.g. the same track across multiple album rips).
+        /// </summary>
+        public bool CollapseDuplicates { get; set; }
     }
 }

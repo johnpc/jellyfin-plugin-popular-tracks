@@ -70,6 +70,21 @@ namespace Jellyfin.Plugin.PopularTracks.Tests
         }
 
         [Fact]
+        public void BuildOrderedResult_CollapsesDuplicateCopiesOfSameSong()
+        {
+            // Plugin.GetConfiguration() returns defaults (CollapseDuplicates = true) in tests.
+            GivenArtistNamed("Radiohead");
+            GivenOwnedTracks(Song("Creep"), Song("Creep"), Song("Creep"), Song("Karma Police"));
+            GivenLastFmTopTracks("Creep", "Karma Police");
+            CaptureDtoOrder();
+
+            var result = Service().BuildOrderedResult(Request());
+
+            result!.Items.Select(i => i.Name).Should().Equal("Creep", "Karma Police");
+            result.TotalRecordCount.Should().Be(2, "duplicate copies collapse to one each");
+        }
+
+        [Fact]
         public void BuildOrderedResult_AppliesPaging()
         {
             GivenArtistNamed("Radiohead");

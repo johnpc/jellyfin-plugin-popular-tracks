@@ -13,6 +13,7 @@ namespace Jellyfin.Plugin.PopularTracks.Tests
 
             config.Enabled.Should().BeTrue();
             config.CacheTtlHours.Should().Be(12);
+            config.CollapseDuplicates.Should().BeTrue();
             config.LastFmApiKey.Should().BeEmpty();
         }
     }

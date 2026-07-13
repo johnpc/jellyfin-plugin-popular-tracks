@@ -78,9 +78,15 @@ namespace Jellyfin.Plugin.PopularTracks.Services
                 return null;
             }
 
-            var ordered = PopularityRanker.Order(owned, KeyOf, ranked, request.StartIndex, request.Limit);
-            var dtos = _dtoService.GetBaseItemDtos(ordered.Cast<BaseItem>().ToList(), request.DtoOptions, user);
-            return new QueryResult<BaseItemDto>(request.StartIndex.GetValueOrDefault(0), owned.Count, dtos);
+            var collapse = Plugin.GetConfiguration().CollapseDuplicates;
+
+            // Order (and optionally de-dupe) the FULL set with no paging so TotalRecordCount reflects
+            // what the client will actually be able to scroll through, then apply paging to that.
+            var full = PopularityRanker.Order(owned, KeyOf, ranked, null, null, collapse);
+            var page = PopularityRanker.Order(full, KeyOf, ranked, request.StartIndex, request.Limit, collapse);
+
+            var dtos = _dtoService.GetBaseItemDtos(page.Cast<BaseItem>().ToList(), request.DtoOptions, user);
+            return new QueryResult<BaseItemDto>(request.StartIndex.GetValueOrDefault(0), full.Count, dtos);
         }
 
         private static TrackKey KeyOf(Audio audio)
