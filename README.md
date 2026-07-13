@@ -1,3 +1,7 @@
+<p align="center">
+  <img src=".github/assets/banner.png" alt="PopularTracks — real popularity, not play counts" width="100%" />
+</p>
+
 # PopularTracks
 
 > Fixes the artist **"Popular"** track ordering in Jellyfin using real Last.fm popularity
