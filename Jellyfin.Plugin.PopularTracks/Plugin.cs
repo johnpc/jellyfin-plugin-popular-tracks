@@ -17,7 +17,7 @@ namespace Jellyfin.Plugin.PopularTracks
     /// The main plugin class for PopularTracks.
     /// </summary>
     [ExcludeFromCodeCoverage]
-    public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
+    public partial class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
     {
         private readonly ILogger<Plugin> _logger;
 
@@ -83,13 +83,16 @@ namespace Jellyfin.Plugin.PopularTracks
             };
         }
 
+        [LoggerMessage(Level = LogLevel.Information, Message = "PopularTracks: attached to {Count} GetItems action(s).")]
+        private static partial void LogAttached(ILogger logger, int count);
+
         private void InjectFilters(IActionDescriptorCollectionProvider provider, IServiceProvider serviceProvider)
         {
             var count = provider.AddDynamicFilter<PopularTracksFilter>(serviceProvider, action =>
                 action.ControllerTypeInfo.FullName == "Jellyfin.Api.Controllers.ItemsController"
                 && action.MethodInfo.Name == "GetItems");
 
-            _logger.LogInformation("PopularTracks: attached to {Count} GetItems action(s).", count);
+            LogAttached(_logger, count);
         }
     }
 }
