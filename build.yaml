@@ -2,8 +2,8 @@
 name: "PopularTracks"
 guid: "f24f31a3-b1a9-4f70-97c9-4b25a8863a59"
 version: "0.0.0.1"
-targetAbi: "10.11.0.0"
-framework: "net9.0"
+targetAbi: "12.0.0.0"
+framework: "net10.0"
 overview: "Fixes artist \"Popular\" track ordering using real Last.fm popularity instead of local play counts."
 description: >
   PopularTracks reorders the artist "Popular" (top songs) list by real listening popularity from the
